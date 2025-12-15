@@ -173,23 +173,23 @@ def create_mcp_server():
     return mcp
 
 
-# Create the MCP server
-mcp_server = create_mcp_server()
-
-# Create ASGI app using FastMCP's sse_app() method
-# This returns a Starlette application that can be run with uvicorn
-app = mcp_server.sse_app()
+# Initialize the MCP server at module level for later use
+mcp_server = None
 
 
 def main():
     """Entry point for the SSE server"""
-    import uvicorn
+    global mcp_server
+
+    # Create the MCP server
+    mcp_server = create_mcp_server()
+
     port = int(os.environ.get("PORT", 8000))
     print(f"Starting Garmin MCP Server on port {port}", file=sys.stderr)
     print(f"SSE endpoint will be available at: http://0.0.0.0:{port}/sse", file=sys.stderr)
 
-    # Run the ASGI app with uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=port)
+    # Run with SSE transport - FastMCP handles everything
+    mcp_server.run(transport='sse')
 
 
 if __name__ == "__main__":

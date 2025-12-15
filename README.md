@@ -13,11 +13,21 @@ This Model Context Protocol (MCP) server connects to Garmin Connect and exposes 
 
 ## Setup
 
+### Local Development
+
 1. Install the required packages on a new environment:
 
 ```bash
 uv sync
 ```
+
+### Remote Deployment (Railway)
+
+Want to host this MCP server remotely and access it from AI assistants like Poke? See:
+
+- **[SETUP_GUIDE.md](SETUP_GUIDE.md)** - Quick start guide
+- **[RAILWAY_DEPLOYMENT.md](RAILWAY_DEPLOYMENT.md)** - Detailed deployment instructions
+- **Quick deploy:** Run `./deploy_to_railway.sh` (requires Railway CLI)
 
 ## Running the Server
 
